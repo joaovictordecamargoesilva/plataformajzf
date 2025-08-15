@@ -1,0 +1,157 @@
+
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "admin",
+      "role": "AdminGeral",
+      "name": "Admin Geral",
+      "email": "admin@jzf.com.br",
+      "permissions": {
+        "canManageClients": true,
+        "canManageDocuments": true,
+        "canManageBilling": true,
+        "canManageAdmins": true,
+        "canManageSettings": true,
+        "canViewReports": true,
+        "canViewDashboard": true,
+        "canManageTasks": true
+      },
+      "activeClientId": null
+    },
+    {
+      "id": 2,
+      "username": "analista",
+      "password": "123",
+      "role": "AdminLimitado",
+      "name": "Ana Lista",
+      "email": "analista@jzf.com.br",
+      "permissions": {
+        "canManageClients": true,
+        "canManageDocuments": true,
+        "canManageBilling": false,
+        "canManageAdmins": false,
+        "canManageSettings": false,
+        "canViewReports": true,
+        "canViewDashboard": true,
+        "canManageTasks": true
+      },
+      "activeClientId": null
+    },
+    {
+      "id": 3,
+      "username": "cliente",
+      "password": "cliente",
+      "role": "Cliente",
+      "name": "Carlos Silva",
+      "email": "carlos.silva@exemplo.com",
+      "clientIds": [
+        101
+      ],
+      "activeClientId": 101
+    }
+  ],
+  "clients": [
+    {
+      "id": 101,
+      "name": "Carlos Silva",
+      "company": "Empresa Exemplo LTDA",
+      "email": "carlos.silva@exemplo.com",
+      "phone": "(11) 99999-8888",
+      "status": "Ativo",
+      "userId": 3,
+      "taxRegime": "Simples Nacional",
+      "businessProfile": {
+        "cnaes": [
+          "6201-5/01"
+        ],
+        "keywords": [
+          "software",
+          "tecnologia",
+          "saas"
+        ],
+        "description": "Desenvolvimento de software por encomenda."
+      }
+    }
+  ],
+  "documents": [],
+  "invoices": [],
+  "payments": [],
+  "tasks": [],
+  "settings": {
+    "pixKey": "a1b2c3d4-e5f6-a1b2-c3d4-e5f6a1b2c3d4",
+    "paymentLink": "https://pagamento.jzf.com.br/12345"
+  },
+  "notifications": [],
+  "opportunities": [],
+  "taskTemplateSets": [
+    {
+      "id": "template-mensal-padrao",
+      "name": "Checklist Mensal Padrão",
+      "taskDescriptions": [
+        "Enviar notas fiscais de serviço",
+        "Enviar extratos bancários",
+        "Enviar arquivos XML de notas de compra"
+      ]
+    }
+  ],
+  "employees": [],
+  "timeSheets": [],
+  "documentTemplates": [
+    {
+        "id": "admissao-funcionario",
+        "name": "Admissão de Novo Funcionário",
+        "fields": [
+            { "id": "nome_completo", "label": "Nome Completo", "type": "text", "required": true, "step": 1 },
+            { "id": "nome_mae", "label": "Nome da Mãe", "type": "text", "required": true, "step": 1 },
+            { "id": "nome_pai", "label": "Nome do Pai", "type": "text", "required": false, "step": 1 },
+            { "id": "data_nascimento", "label": "Data de Nascimento", "type": "date", "required": true, "step": 1 },
+            { "id": "local_nascimento", "label": "Local de Nascimento (Cidade/UF)", "type": "text", "required": true, "step": 1 },
+            { "id": "cor", "label": "Cor/Raça", "type": "select", "required": true, "options": ["Branca", "Preta", "Parda", "Amarela", "Indígena"], "step": 1 },
+            { "id": "local_moradia", "label": "Endereço Completo (com CEP)", "type": "textarea", "required": true, "step": 1 },
+            { "id": "possui_deficiencia", "label": "Possui Deficiência?", "type": "select", "required": true, "options": ["Não", "Sim"], "step": 1 },
+            { "id": "deficiencia_detalhes", "label": "Qual a Deficiência?", "type": "text", "required": false, "description": "Visível apenas se 'Sim' for selecionado acima.", "step": 1 },
+            { "id": "rg", "label": "RG", "type": "text", "required": true, "step": 2 },
+            { "id": "cpf", "label": "CPF", "type": "text", "required": true, "step": 2 },
+            { "id": "pis", "label": "PIS", "type": "text", "required": true, "step": 2 },
+            { "id": "titulo_eleitor", "label": "Título de Eleitor", "type": "text", "required": true, "step": 2 },
+            { "id": "carteira_trabalho_digital", "label": "Carteira de Trabalho Digital?", "type": "checkbox", "required": false, "step": 2 },
+            { "id": "carteira_trabalho_numero", "label": "Número da Carteira de Trabalho (Física)", "type": "text", "required": false, "description": "Obrigatório se não for digital.", "step": 2 },
+            { "id": "possui_filhos", "label": "Possui Filhos?", "type": "checkbox", "required": false, "step": 2 },
+            { "id": "cargo", "label": "Cargo", "type": "text", "required": true, "step": 3 },
+            { "id": "salario", "label": "Salário (R$)", "type": "number", "required": true, "step": 3 },
+            { "id": "data_admissao", "label": "Data de Admissão", "type": "date", "required": true, "step": 3 },
+            { "id": "horario", "label": "Horário de Trabalho", "type": "text", "required": true, "description": "Ex: 08:00 às 18:00", "step": 3 },
+            { "id": "contrato_experiencia", "label": "Contrato de Experiência?", "type": "select", "required": true, "options": ["Sim", "Não"], "step": 3 },
+            { "id": "receber_adiantamento", "label": "Receberá Adiantamento Salarial?", "type": "select", "required": true, "options": ["Sim", "Não"], "step": 3 },
+            { "id": "observacao", "label": "Observações", "type": "textarea", "required": false, "step": 3 },
+            { "id": "exame_admissional", "label": "Anexar Exame Admissional (ASO)", "type": "file", "required": true, "acceptedTypes": "application/pdf,image/*", "step": 4 },
+            { "id": "documento_identidade", "label": "Anexar Documento de Identidade (RG/CNH)", "type": "file", "required": true, "acceptedTypes": "application/pdf,image/*", "step": 4 },
+            { "id": "comprovante_residencia", "label": "Anexar Comprovante de Residência", "type": "file", "required": true, "acceptedTypes": "application/pdf,image/*", "step": 4 }
+        ],
+        "steps": [
+            { "title": "Dados Pessoais" },
+            { "title": "Documentação" },
+            { "title": "Dados Contratuais" },
+            { "title": "Anexos Obrigatórios" }
+        ]
+    },
+    {
+      "id": "rescisao-contrato",
+      "name": "Rescisão de Contrato de Funcionário",
+      "fields": [
+        { "id": "nome_funcionario_rescisao", "label": "Nome do Funcionário a ser Desligado", "type": "select", "required": true, "step": 1 },
+        { "id": "motivo_rescisao", "label": "Motivo da Rescisão", "type": "select", "required": true, "options": ["Pedido de demissão", "Demissão sem justa causa", "Término de contrato"], "step": 1 },
+        { "id": "data_aviso_previo", "label": "Data do Início do Aviso Prévio", "type": "date", "required": true, "step": 1 },
+        { "id": "tipo_aviso_previo", "label": "Tipo de Aviso Prévio", "type": "select", "required": true, "options": ["Trabalhado", "Indenizado"], "step": 1 },
+        { "id": "exame_demissional", "label": "Anexar Exame Demissional (ASO)", "type": "file", "required": true, "acceptedTypes": "application/pdf,image/*", "step": 2 }
+      ],
+      "steps": [
+        { "title": "Informações da Rescisão" },
+        { "title": "Documento Demissional" }
+      ]
+    }
+  ],
+  "complianceFindings": []
+}
