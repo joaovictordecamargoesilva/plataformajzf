@@ -1,0 +1,301 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql" // ou "mysql", "sqlite", etc.
+  url      = env("DATABASE_URL")
+}
+
+// --- ENUMS ---
+
+enum UserRole {
+  AdminGeral
+  AdminLimitado
+  Cliente
+}
+
+enum TaxRegime {
+  SimplesNacional
+  LucroPresumido
+  LucroReal
+}
+
+enum ClientStatus {
+  Ativo
+  Inativo
+}
+
+enum DocumentType {
+  PDF
+  Excel
+  XML
+  Outro
+  Formulario
+}
+
+enum DocumentSource {
+  cliente
+  escritorio
+}
+
+enum DocumentStatus {
+  Pendente
+  Recebido
+  Revisado
+  AguardandoAssinatura
+  AguardandoAprovacao
+  PendenteEtapa2
+  Concluido
+}
+
+// ✅ ENUM ADICIONADO AQUI
+enum SignatoryStatus {
+  pendente
+  assinado
+}
+
+enum InvoiceStatus {
+  Pendente
+  Pago
+  Atrasado
+}
+
+enum TaskStatus {
+  Pendente
+  Concluida
+}
+
+enum OpportunityType {
+  IncentivoFiscal
+  EditalLicitacao
+  Outro
+}
+
+enum ComplianceStatus {
+  OK
+  Atencao
+  Pendencia
+  Informativo
+}
+
+enum EmployeeStatus {
+  Ativo
+  Inativo
+}
+
+enum TimeSheetStatus {
+  PendenteDeEnvio
+  EnviadoParaAnalise
+  Processado
+  ErroNaAnalise
+}
+
+
+// --- MODELS ---
+
+model User {
+  id               Int      @id @default(autoincrement())
+  username         String   @unique
+  password         String
+  role             UserRole @default(Cliente)
+  name             String
+  email            String   @unique
+  activeClientId   Int?
+  
+  canManageClients   Boolean @default(false)
+  canManageDocuments Boolean @default(true)
+  canManageBilling   Boolean @default(true)
+  canManageAdmins    Boolean @default(false)
+  canManageSettings  Boolean @default(false)
+  canViewReports     Boolean @default(true)
+  canViewDashboard   Boolean @default(true)
+  canManageTasks     Boolean @default(true)
+
+  clients Client[]
+}
+
+model Client {
+  id                  Int      @id @default(autoincrement())
+  name                String
+  company             String
+  email               String
+  phone               String
+  status              ClientStatus @default(Ativo)
+  taxRegime           TaxRegime
+  cnaes               Json     @default("[]")
+  keywords            Json     @default("[]")
+  businessDescription String   @default("")
+
+  users     User[]
+  documents Document[]
+  invoices  Invoice[]
+  tasks     Task[]
+  employees Employee[]
+}
+
+model Document {
+  id                  Int               @id @default(autoincrement())
+  clientId            Int
+  name                String
+  description         String?
+  type                DocumentType
+  uploadDate          DateTime          @default(now())
+  uploadedBy          String
+  source              DocumentSource
+  status              DocumentStatus
+  requestText         String?
+  file                Json?
+  templateId          String?
+  formData            Json?
+  workflow            Json?
+  aiAnalysis          Json?
+
+  client              Client            @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  signatures          Signature[]
+  requiredSignatories RequiredSignatory[]
+  auditLog            AuditLog[]
+}
+
+model Signature {
+  id          Int      @id @default(autoincrement())
+  documentId  Int
+  userId      Int
+  date        DateTime
+  signatureId String
+  auditTrail  Json
+
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+}
+
+model RequiredSignatory {
+  id          Int             @id @default(autoincrement())
+  documentId  Int
+  userId      Int
+  name        String
+  // ✅ TIPO DO CAMPO ATUALIZADO AQUI
+  status      SignatoryStatus @default(pendente)
+
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+}
+
+model AuditLog {
+  id         Int      @id @default(autoincrement())
+  documentId Int
+  user       String
+  date       DateTime
+  action     String
+
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+}
+
+model Invoice {
+  id          String        @id @default(cuid())
+  clientId    Int
+  description String
+  amount      Float
+  dueDate     DateTime
+  status      InvoiceStatus
+  boletoPdf   String?
+  isRecurring Boolean       @default(false)
+
+  client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+}
+
+model Settings {
+  id          Int    @id @default(1)
+  pixKey      String @default("")
+  paymentLink String @default("")
+}
+
+model AppNotification {
+  id      Int      @id @default(autoincrement())
+  userId  Int?
+  message String
+  date    DateTime @default(now())
+  read    Boolean  @default(false)
+  link    String?
+}
+
+model Task {
+  id           Int        @id @default(autoincrement())
+  clientId     Int
+  description  String
+  status       TaskStatus
+  isRecurring  Boolean
+  createdBy    String
+  creationDate DateTime   @default(now())
+
+  client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+}
+
+model Opportunity {
+  id                 String          @id @default(cuid())
+  clientId           Int
+  type               OpportunityType
+  title              String
+  description        String
+  source             String
+  dateFound          DateTime        @default(now())
+  submissionDeadline DateTime?
+}
+
+model ComplianceFinding {
+  id          String           @id @default(cuid())
+  clientId    Int
+  title       String
+  status      ComplianceStatus
+  summary     String
+  sourceUrl   String
+  dateChecked DateTime         @default(now())
+}
+
+model TaskTemplateSet {
+  id               String @id @default(cuid())
+  name             String
+  taskDescriptions Json
+}
+
+model Employee {
+  id       Int            @id @default(autoincrement())
+  clientId Int
+  name     String
+  role     String
+  status   EmployeeStatus @default(Ativo)
+  salary   Float
+
+  client     Client      @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  timeSheets TimeSheet[]
+}
+
+model TimeSheet {
+  id                    String          @id @default(cuid())
+  clientId              Int
+  employeeId            Int
+  month                 Int
+  year                  Int
+  status                TimeSheetStatus
+  totalOvertimeHours50  Float
+  totalOvertimeHours100 Float
+  totalNightlyHours     Float
+  totalLatenessMinutes  Int
+  totalAbsencesDays     Int
+  dsrValue              Float
+  sourceFile            Json?
+  aiAnalysisNotes       String?
+
+  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+
+  @@unique([employeeId, clientId, year, month])
+}
+
+model DocumentTemplate {
+  id         String @id @default(cuid())
+  name       String
+  fields     Json?
+  fileConfig Json?
+  steps      Json?
+}
