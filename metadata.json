@@ -1,0 +1,8 @@
+{
+  "name": "Plataforma JZF",
+  "description": "Um portal do cliente exclusivo e seguro, projetado para otimizar a comunicação e a gestão de serviços entre um escritório de contabilidade e seus clientes.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "prompt": ""
+}
