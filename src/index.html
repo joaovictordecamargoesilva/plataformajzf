@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCAzMDAgODAiPgogIDxzdHlsZT4KICAgIC5qLWYgeyBmaWxsOiAjNGE1NTY4OyB9IC8qIGRhcmstZ3JheSAqLwogICAgLnogeyBmaWxsOiAjOTIyYzI2OyB9IC8qIHByaW1hcnkgKi8KICAgIC50ZXh0IHsgZm9udC1mYW1pbHk6ICdBcmlhbCcsIHNhbnMtc2VyaWY7IH0KICA8L3N0eWxlPgogIDx0ZXh0IHg9IjEwIiB5PSI2MCIgZm9udC1zaXplPSI2MCIgZm9udC13ZWlnaHQ9ImJvbGQiIGNsYXNzPSJ0ZXh0IGotZiI+SjwvdGV4dD4KICA8dGV4dCB4PSI1MCIgeT0iNjAiIGZvbnQtc2l6ZT0iNjAiIGZvbnQtd2VpZ2h0PSJib2xkIiBjbGFzcz0idGV4dCB6Ij5aPC90ZXh0PgogIDx0ZXh0IHg9Ijk1IiB5PSI2MCIgZm9udC1zaXplPSI2MCIgZm9udC13ZWlnaHQ9ImJvbGQiIGNsYXNzPSJ0ZXh0IGotZiI+RjwvdGV4dD4KICA8dGV4dCB4PSIxNjAiIHk9IjQ1IiBmb250LXNpemU9IjIwIiBmb250LXdlaWdodD0iYm9sZCIgY2xhc3M9InRleHQgai1mIj5Db250YWJpbGlkYWRlPC90ZXh0PgogIDxyZWN0IHg9IjE2MCIgeT0iNTUiIHdpZHRoPSIxMzAiIGhlaWdodD0iNSIgY2xhc3M9InoiIC8+Cjwvc3ZnPg==" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plataforma JZF - Portal do Cliente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'primary': '#922c26',
+              'primary-dark': '#7a2420',
+              'secondary': '#e6e6e6',
+              'light-gray': '#f7fafc',
+              'dark-gray': '#4a5568',
+              'text-primary': '#1a202c',
+              'text-secondary': '#718096',
+            }
+          }
+        }
+      }
+    </script>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.1.1",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.1/",
+    "react/": "https://esm.sh/react@^19.1.1/",
+    "jspdf": "https://esm.sh/jspdf@^3.0.1",
+    "jspdf-autotable": "https://esm.sh/jspdf-autotable@^5.0.2",
+    "vite": "https://esm.sh/vite@^7.1.3",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.0.1",
+    "express": "https://esm.sh/express@^5.1.0",
+    "cors": "https://esm.sh/cors@^2.8.5",
+    "cookie-parser": "https://esm.sh/cookie-parser@^1.4.7",
+    "dotenv/": "https://esm.sh/dotenv@^17.2.1/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.15.0",
+    "marked": "https://esm.sh/marked@^16.2.0",
+    "path": "https://esm.sh/path@^0.12.7",
+    "@prisma/client": "https://esm.sh/@prisma/client@^6.14.0",
+    "process": "https://esm.sh/process@^0.11.10",
+    "pdf-lib": "https://esm.sh/pdf-lib@^1.17.1"
+  }
+}
+</script>
+</head>
+  <body class="bg-light-gray font-sans">
+    <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
+</html>
