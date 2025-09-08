@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cstyle%3E.jzf-j, .jzf-f { fill: %234a5568; } .jzf-z { fill: %23922c26; } %3C/style%3E%3Ctext x='5' y='70' font-family='Arial, sans-serif' font-size='50' font-weight='bold' class='jzf-j'%3EJ%3C/text%3E%3Ctext x='30' y='70' font-family='Arial, sans-serif' font-size='50' font-weight='bold' class='jzf-z'%3EZ%3C/text%3E%3Ctext x='55' y='70' font-family='Arial, sans-serif' font-size='50' font-weight='bold' class='jzf-f'%3EF%3C/text%3E%3C/svg%3E" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plataforma JZF - Portal do Cliente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'primary': '#922c26',
+              'primary-dark': '#7a2420',
+              'secondary': '#e6e6e6',
+              'light-gray': '#f7fafc',
+              'dark-gray': '#4a5568',
+              'text-primary': '#1a202c',
+              'text-secondary': '#718096',
+            }
+          }
+        }
+      }
+    </script>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.1.1",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.1/",
+    "react/": "https://esm.sh/react@^19.1.1/",
+    "jspdf": "https://esm.sh/jspdf@^3.0.1",
+    "jspdf-autotable": "https://esm.sh/jspdf-autotable@^5.0.2",
+    "vite": "https://esm.sh/vite@^7.1.3",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.0.1",
+    "express": "https://esm.sh/express@^5.1.0",
+    "cors": "https://esm.sh/cors@^2.8.5",
+    "cookie-parser": "https://esm.sh/cookie-parser@^1.4.7",
+    "dotenv/": "https://esm.sh/dotenv@^17.2.1/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.15.0",
+    "marked": "https://esm.sh/marked@^16.2.0",
+    "path": "https://esm.sh/path@^0.12.7",
+    "@prisma/client": "https://esm.sh/@prisma/client@^6.14.0",
+    "process": "https://esm.sh/process@^0.11.10",
+    "pdf-lib": "https://esm.sh/pdf-lib@^1.17.1"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-light-gray font-sans">
+    <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
